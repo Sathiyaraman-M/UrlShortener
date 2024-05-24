@@ -1,6 +1,14 @@
+using UrlShortner;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+builder.Host.UseOrleans(siloBuilder =>
+{
+    siloBuilder.UseLocalhostClustering();
+    siloBuilder.AddMemoryGrainStorage(StorageConstants.DEFAULT_STORAGE_NAME);
+});
+
+app.MapGet("/", () => "URL Shortner using Microsoft Orleans");
 
 app.Run();
