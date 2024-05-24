@@ -1,6 +1,7 @@
 using Orleans.Runtime;
+using UrlShortener.Models;
 
-namespace UrlShortner.Grains;
+namespace UrlShortener.Grains;
 
 [Alias("IUrlShortnerGrain")]
 public interface IUrlShortnerGrain : IGrainWithStringKey

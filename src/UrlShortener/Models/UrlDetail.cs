@@ -1,4 +1,4 @@
-namespace UrlShortner.Grains;
+namespace UrlShortener.Models;
 
 [GenerateSerializer]
 [Alias(nameof(UrlDetail))]

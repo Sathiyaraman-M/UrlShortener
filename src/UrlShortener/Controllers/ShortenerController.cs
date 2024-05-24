@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using UrlShortner.Grains;
+using UrlShortener.Grains;
 
-namespace UrlShortner.Controllers;
+namespace UrlShortener.Controllers;
 
 [ApiController]
 public class ShortenerController(IGrainFactory grainFactory) : ControllerBase

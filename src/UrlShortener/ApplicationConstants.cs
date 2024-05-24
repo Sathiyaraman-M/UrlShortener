@@ -1,4 +1,4 @@
-namespace UrlShortner;
+namespace UrlShortener;
 
 public static class StorageConstants
 {
