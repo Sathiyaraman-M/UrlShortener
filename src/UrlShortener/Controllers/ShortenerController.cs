@@ -13,23 +13,19 @@ public class ShortenerController(IGrainFactory grainFactory) : ControllerBase
 
         if (string.IsNullOrEmpty(url) && Uri.IsWellFormedUriString(host, UriKind.Absolute) is false)
         {
-            return BadRequest($"""
+            return BadRequest(
+                $"""
                 The URL query string is required and needs to be well formed.
                 Consider, ${host}/shorten?url=https://www.example.com.
-                """);
+                """
+            );
         }
 
         var segment = ConstructNewSegment();
-
         var shortenedGrain = grainFactory.GetGrain<IUrlShortnerGrain>(segment);
-
         await shortenedGrain.SetUrl(url);
 
-        var shortenedUriBuilder = new UriBuilder(host)
-        {
-            Path = $"/go/{segment}"
-        };
-
+        var shortenedUriBuilder = new UriBuilder(host) { Path = $"/go/{segment}" };
         return Ok(shortenedUriBuilder.Uri);
     }
 

@@ -5,8 +5,8 @@ namespace UrlShortener.Models;
 public record class UrlDetail
 {
     [Id(0)]
-    public string FullUrl { get; set; } = "";
+    public string FullUrl { get; set; }
 
     [Id(1)]
-    public string ShortenedUrlSegment { get; set; } = "";
+    public string ShortenedUrlSegment { get; set; }
 }

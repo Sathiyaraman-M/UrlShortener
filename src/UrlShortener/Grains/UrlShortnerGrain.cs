@@ -3,17 +3,23 @@ using UrlShortener.Models;
 
 namespace UrlShortener.Grains;
 
-[Alias("IUrlShortnerGrain")]
+[Alias(nameof(IUrlShortnerGrain))]
 public interface IUrlShortnerGrain : IGrainWithStringKey
 {
-    [Alias("GetUrl")]
+    [Alias(nameof(GetUrl))]
     Task<string> GetUrl();
 
-    [Alias("SetUrl")]
+    [Alias(nameof(SetUrl))]
     Task SetUrl(string url);
 }
 
-public sealed class UrlShortnerGrain([PersistentState(stateName: "url", storageName: StorageConstants.DEFAULT_STORAGE_NAME)] IPersistentState<UrlDetail> state) : Grain, IUrlShortnerGrain
+public sealed class UrlShortnerGrain(
+    [PersistentState(
+        stateName: StorageConstants.DEFAULT_STATE_NAME,
+        storageName: StorageConstants.DEFAULT_STORAGE_NAME
+    )]
+        IPersistentState<UrlDetail> state
+) : Grain, IUrlShortnerGrain
 {
     public Task<string> GetUrl() => Task.FromResult(state.State.FullUrl);
 
