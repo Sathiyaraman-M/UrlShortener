@@ -2,8 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/runtime:8.0-jammy-chiseled</ContainerBaseImage>
+    <ContainerRepository>url-shortener</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>
