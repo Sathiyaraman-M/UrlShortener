@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <ProjectTargetFramework>net8.0</ProjectTargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Label="Container Publish Props">
+    <BaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled</BaseImage>
+    <ContainerName>url-shortener</ContainerName>
+    <HttpPort>8080</HttpPort>
+  </PropertyGroup>
+</Project>
