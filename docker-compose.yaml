@@ -2,7 +2,7 @@ services:
   url-shortener:
     container_name: UrlShortener
     image: ghcr.io/sathiyaraman-m/url-shortener:latest
-    hostname: url-shortner
+    hostname: url-shortener
     ports:
       - 7001:8080
     networks:
