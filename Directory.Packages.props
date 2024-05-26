@@ -3,6 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="AspNetCore.HealthChecks.SqlServer" Version="8.0.2" />
     <PackageVersion Include="Microsoft.Orleans.Persistence.AdoNet" Version="8.1.0" />
     <PackageVersion Include="Microsoft.Orleans.Server" Version="8.1.0" />
     <PackageVersion Include="System.Data.SqlClient" Version="4.8.6" />
