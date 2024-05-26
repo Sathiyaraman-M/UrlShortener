@@ -1,3 +1,5 @@
+using UrlShortener;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseOrleans(siloBuilder =>
@@ -5,8 +7,8 @@ builder.Host.UseOrleans(siloBuilder =>
     siloBuilder.UseLocalhostClustering();
     siloBuilder.AddAdoNetGrainStorageAsDefault(options =>
     {
-        options.Invariant = "System.Data.SqlClient";
-        options.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        options.Invariant = StorageConstants.DEFAULT_STORAGE_INVARIANT;
+        options.ConnectionString = builder.Configuration.GetConnectionString(StorageConstants.DEFAULT_CONNECTION_NAME);
     });
 });
 
