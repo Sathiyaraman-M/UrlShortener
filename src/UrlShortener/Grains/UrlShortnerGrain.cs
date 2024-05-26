@@ -14,11 +14,7 @@ public interface IUrlShortnerGrain : IGrainWithStringKey
 }
 
 public sealed class UrlShortnerGrain(
-    [PersistentState(
-        stateName: StorageConstants.DEFAULT_STATE_NAME,
-        storageName: StorageConstants.DEFAULT_STORAGE_NAME
-    )]
-        IPersistentState<UrlDetail> state
+    [PersistentState(StorageConstants.DEFAULT_STATE_NAME)] IPersistentState<UrlDetail> state
 ) : Grain, IUrlShortnerGrain
 {
     public Task<string> GetUrl() => Task.FromResult(state.State.FullUrl);

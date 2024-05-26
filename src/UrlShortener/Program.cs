@@ -1,13 +1,16 @@
-using UrlShortener;
-
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
 builder.Host.UseOrleans(siloBuilder =>
 {
     siloBuilder.UseLocalhostClustering();
-    siloBuilder.AddMemoryGrainStorage(StorageConstants.DEFAULT_STORAGE_NAME);
+    siloBuilder.AddAdoNetGrainStorageAsDefault(options =>
+    {
+        options.Invariant = "System.Data.SqlClient";
+        options.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    });
 });
+
+using var app = builder.Build();
 
 app.MapGet("/", () => "URL Shortner using Microsoft Orleans");
 
