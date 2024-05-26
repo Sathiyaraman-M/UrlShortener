@@ -1,0 +1,52 @@
+services:
+  url-shortener:
+    container_name: UrlShortener
+    image: ghcr.io/sathiyaraman-m/url-shortener:latest
+    hostname: url-shortner
+    ports:
+      - 7001:8080
+    networks:
+      - url-shortener
+    environment:
+      ConnectionStrings__DefaultConnection: Server=sql-server;Database=UrlShortener;User ID=SA;Password=${SQL_SERVER_SA_PASSWORD}
+    depends_on:
+      - sql-server
+      - sql-init
+
+  sql-server:
+    container_name: SqlServer
+    hostname: sql-server
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    user: 0:0
+    ports:
+      - 1433:1433
+    networks:
+      - url-shortener
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: ${SQL_SERVER_SA_PASSWORD}
+      MSSQL_PID: Express
+    volumes:
+      - sql-server:/var/opt/mssql
+
+  sql-init:
+    container_name: UrlShortener-Sql-Initialize
+    image: mcr.microsoft.com/mssql-tools
+    networks:
+      - url-shortener
+    environment:
+      SQL_SERVER_SA_PASSWORD: ${SQL_SERVER_SA_PASSWORD}
+    depends_on:
+      - sql-server
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    entrypoint: /docker-entrypoint-initdb.d/entrypoint.sh
+
+volumes:
+  sql-server:
+    name: UrlShortener-SqlServer
+
+networks:
+  url-shortener:
+    name: UrlShortener-Network
