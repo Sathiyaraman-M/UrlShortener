@@ -39,7 +39,8 @@ public class ShortenerController(IGrainFactory grainFactory) : ControllerBase
         return Redirect(url);
     }
 
-    private static string GetHost(HttpRequest request) => $"{request.Scheme}:{request.Host.Value}";
+    private static string GetHost(HttpRequest request) =>
+        $"{request.Scheme}://{request.Host.Value}";
 
     private static string ConstructNewSegment() => Guid.NewGuid().GetHashCode().ToString("X");
 }

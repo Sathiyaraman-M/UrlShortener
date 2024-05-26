@@ -12,8 +12,12 @@ builder.Host.UseOrleans(siloBuilder =>
     });
 });
 
+builder.Services.AddControllers();
+
 using var app = builder.Build();
 
+app.UseRouting();
+app.MapControllers();
 app.MapGet("/", () => "URL Shortner using Microsoft Orleans");
 
 app.Run();
